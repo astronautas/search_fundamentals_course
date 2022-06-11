@@ -1,0 +1,1 @@
+./delete-indexes.sh && ./index-data.sh && python week1/index_products.py

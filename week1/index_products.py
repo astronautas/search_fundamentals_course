@@ -31,31 +31,31 @@ mappings = [
     "name/text()", "name",
     "type/text()", "type",
     "regularPrice/text()", "regularPrice",
-    # "salePrice/text()", "salePrice",
-    # "onSale/text()", "onSale",
-    # "salesRankShortTerm/text()", "salesRankShortTerm",
-    # "salesRankMediumTerm/text()", "salesRankMediumTerm",
-    # "salesRankLongTerm/text()", "salesRankLongTerm",
-    # "bestSellingRank/text()", "bestSellingRank",
-    # "url/text()", "url",
-    # "categoryPath/*/name/text()", "categoryPath",  # Note the match all here to get the subfields
-    # "categoryPath/*/id/text()", "categoryPathIds",  # Note the match all here to get the subfields
-    # "categoryPath/category[last()]/id/text()", "categoryLeaf",
-    # "count(categoryPath/*/name)", "categoryPathCount",
-    # "customerReviewCount/text()", "customerReviewCount",
-    # "customerReviewAverage/text()", "customerReviewAverage",
-    # "inStoreAvailability/text()", "inStoreAvailability",
-    # "onlineAvailability/text()", "onlineAvailability",
-    # "releaseDate/text()", "releaseDate",
+    "salePrice/text()", "salePrice",
+    "onSale/text()", "onSale",
+    "salesRankShortTerm/text()", "salesRankShortTerm",
+    "salesRankMediumTerm/text()", "salesRankMediumTerm",
+    "salesRankLongTerm/text()", "salesRankLongTerm",
+    "bestSellingRank/text()", "bestSellingRank",
+    "url/text()", "url",
+    "categoryPath/*/name/text()", "categoryPath",  # Note the match all here to get the subfields
+    "categoryPath/*/id/text()", "categoryPathIds",  # Note the match all here to get the subfields
+    "categoryPath/category[last()]/id/text()", "categoryLeaf",
+    "count(categoryPath/*/name)", "categoryPathCount",
+    "customerReviewCount/text()", "customerReviewCount",
+    "customerReviewAverage/text()", "customerReviewAverage",
+    "inStoreAvailability/text()", "inStoreAvailability",
+    "onlineAvailability/text()", "onlineAvailability",
+    "releaseDate/text()", "releaseDate",
     "shortDescription/text()", "shortDescription",
-    # "class/text()", "class",
-    # "classId/text()", "classId",
+    "class/text()", "class",
+    "classId/text()", "classId",
     "department/text()", "department",
     "departmentId/text()", "departmentId",
-    # "bestBuyItemId/text()", "bestBuyItemId",
-    # "description/text()", "description",
-    # "manufacturer/text()", "manufacturer",
-    # "modelNumber/text()", "modelNumber",
+    "bestBuyItemId/text()", "bestBuyItemId",
+    "description/text()", "description",
+    "manufacturer/text()", "manufacturer",
+    "modelNumber/text()", "modelNumber",
     "image/text()", "image",
     "longDescription/text()", "longDescription",
     "longDescriptionHtml/text()", "longDescriptionHtml",
@@ -117,7 +117,7 @@ def index_file(file, index_name):
 def main(source_dir: str, index_name: str):
     pool = ProcessPoolExecutor(max_workers=8)
 
-    files = glob.glob(source_dir + "/*.xml")[0:5]
+    files = glob.glob(source_dir + "/*.xml")[0:1]
     futures = []
 
     # Files are independent, worth processing them in parallel for speed-up (~5x)

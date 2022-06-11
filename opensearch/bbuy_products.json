@@ -5,7 +5,31 @@
   "mappings": {
     "properties": {
       "regularPrice": {
-        "type": "float"
+        "type": "double"
+      },
+      "department": {
+        "type": "keyword",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "image": {
+        "type": "keyword",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "name": {
+        "type": "keyword",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
       }
     }
   }
