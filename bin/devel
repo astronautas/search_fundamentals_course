@@ -1,4 +1,4 @@
 export FLASK_ENV=development
 export FLASK_APP=week1
 
-nohup flask run --port 3000
+flask run --port 3000
