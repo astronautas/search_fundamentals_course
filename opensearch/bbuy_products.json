@@ -7,6 +7,15 @@
       "regularPrice": {
         "type": "double"
       },
+      "salesRankShortTerm": {
+        "type": "integer"
+      },
+      "salesRankMediumTerm": {
+        "type": "integer"
+      },
+      "salesRankLongTerm": {
+        "type": "integer"
+      },
       "department": {
         "type": "keyword",
         "fields": {
@@ -24,10 +33,32 @@
         }
       },
       "name": {
-        "type": "keyword",
+        "type": "text",
         "fields": {
           "keyword": {
             "type": "keyword"
+          },
+          "stemmed": {
+            "type": "text",
+            "analyzer": "english"
+          }
+        }
+      },
+      "shortDescription": {
+        "type": "text",
+        "fields": {
+          "stemmed": {
+            "type": "text",
+            "analyzer": "english"
+          }
+        }
+      },
+      "longDescription": {
+        "type": "text",
+        "fields": {
+          "stemmed": {
+            "type": "text",
+            "analyzer": "english"
           }
         }
       }

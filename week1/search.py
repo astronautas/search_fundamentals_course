@@ -118,14 +118,13 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
             "bool": {
                 "must": {
                     "query_string": {
-                        "fields": ["name", "shortDescription", "longDescription"],
+                        "fields": ["name^5", "shortDescription", "longDescription"],
                         "query": user_query,
                         "phrase_slop": 3
                     }
                 },
                 "filter": filters
             },
-            # Replace me with a query that both searches and filters
         },
         "highlight": {
             "fields": {
@@ -135,8 +134,7 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
             }
         },
         "sort": [
-            {"regular_price": {"order": sortDir, "unmapped_type" : "double"}},
-            {"name": {"order": sortDir}}
+            {sort: {"order": sortDir}},
         ],
         "aggs": {
             "regularPrice": {

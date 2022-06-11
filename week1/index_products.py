@@ -115,9 +115,9 @@ def index_file(file, index_name):
 @click.option('--source_dir', '-s', default="/workspace/datasets/product_data/products", help='XML files source directory')
 @click.option('--index_name', '-i', default="bbuy_products", help="The name of the index to write to")
 def main(source_dir: str, index_name: str):
-    pool = ProcessPoolExecutor(max_workers=8)
+    pool = ProcessPoolExecutor(max_workers=12)
 
-    files = glob.glob(source_dir + "/*.xml")[0:1]
+    files = glob.glob(source_dir + "/*.xml")
     futures = []
 
     # Files are independent, worth processing them in parallel for speed-up (~5x)
