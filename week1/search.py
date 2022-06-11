@@ -59,6 +59,7 @@ def process_filters(filters_input):
 @bp.route('/query', methods=['GET', 'POST'])
 def query():
     opensearch = get_opensearch() # Load up our OpenSearch client from the opensearch.py file.
+
     # Put in your code to query opensearch.  Set error as appropriate.
     error = None
     user_query = None
@@ -94,7 +95,11 @@ def query():
     print("query obj: {}".format(query_obj))
 
     #### Step 4.b.ii
-    response = None   # TODO: Replace me with an appropriate call to OpenSearch
+    response = opensearch.search(
+        body = query_obj,
+        index = "bbuy_products"
+    )
+
     # Postprocess results here if you so desire
 
     #print(response)
@@ -111,7 +116,9 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
     query_obj = {
         'size': 10,
         "query": {
-            "match_all": {} # Replace me with a query that both searches and filters
+        'match_phrase': {
+            'name': {"query": user_query}
+        } # Replace me with a query that both searches and filters
         },
         "aggs": {
             #### Step 4.b.i: create the appropriate query and aggregations here
