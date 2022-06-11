@@ -115,15 +115,44 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
     query_obj = {
         'size': 10,
         "query": {
-            "bool": {
-                "must": {
-                    "query_string": {
-                        "fields": ["name^5", "shortDescription", "longDescription"],
-                        "query": user_query,
-                        "phrase_slop": 3
-                    }
+            "function_score": {
+                "query": {
+                    "bool": {
+                        "must": {
+                            "query_string": {
+                                "fields": ["name^100", "shortDescription^10", "longDescription^10"],
+                                "query": user_query,
+                                "phrase_slop": 3
+                            }
+                        },
+                        "filter": filters,
+                    },
                 },
-                "filter": filters
+                "boost_mode": "multiply",
+                "score_mode": "avg",
+        "functions": [
+            {
+              "field_value_factor": {
+              "field": "salesRankLongTerm",
+              "modifier": "reciprocal",
+              "missing": 100000000
+              }
+            },
+            {
+              "field_value_factor": {
+              "field": "salesRankMediumTerm",
+              "modifier": "reciprocal",
+              "missing": 100000000
+              }
+            },
+            {
+              "field_value_factor": {
+              "field": "salesRankShortTerm",
+              "modifier": "reciprocal",
+              "missing": 100000000
+              }
+            }
+        ]                
             },
         },
         "highlight": {
