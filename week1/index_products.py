@@ -1,4 +1,5 @@
 # From https://github.com/dshvadskiy/search_with_machine_learning_course/blob/main/index_products.py
+import opensearchpy
 import requests
 from lxml import etree
 
@@ -108,6 +109,29 @@ def index_file(file, index_name):
     bulk(client, docs)
 
     return file
+
+def index_file(file, index_name):
+    docs_indexed = 0
+    client = get_opensearch()
+    logger.info(f'Processing file : {file}')
+    tree = etree.parse(file)
+    root = tree.getroot()
+    children = root.findall("./product")
+    docs = []
+    for child in children:
+        doc = {}
+        for idx in range(0, len(mappings), 2):
+            xpath_expr = mappings[idx]
+            key = mappings[idx + 1]
+            doc[key] = child.xpath(xpath_expr)
+        #print(doc)
+        if 'productId' not in doc or len(doc['productId']) == 0:
+            continue
+        #### Step 2.b: Create a valid OpenSearch Doc and bulk index 2000 docs at a time
+        the_doc = None
+        docs.append(the_doc)
+
+    return docs_indexed
 
 @click.command()
 @click.option('--source_dir', '-s', default="/workspace/datasets/product_data/products", help='XML files source directory')
