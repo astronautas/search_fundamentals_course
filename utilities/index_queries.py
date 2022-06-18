@@ -3,13 +3,14 @@ import click
 import pandas as pd
 from opensearchpy import OpenSearch
 from opensearchpy.helpers import bulk
-
+from functools import lru_cache
 import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logging.basicConfig(format='%(levelname)s:%(message)s')
 
+@lru_cache()
 def get_opensearch():
 
     host = 'localhost'

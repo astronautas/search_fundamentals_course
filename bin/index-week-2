@@ -1,0 +1,1 @@
+./index-data.sh -y ./week2 -p ./week2/conf/bbuy_products.json -q ./week2/conf/bbuy_queries.json
